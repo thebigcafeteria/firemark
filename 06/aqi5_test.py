@@ -50,6 +50,7 @@ REG_SLOTA_CH1 = 0x64
 REG_SLOTA_CH2 = 0x65
 REG_SLOTA_CH3 = 0x66
 REG_SLOTA_CH4 = 0x67
+REG_PAGE_SEL = 0x0F
 
 
 def write_reg16(bus, reg, value):
@@ -61,6 +62,12 @@ def read_reg16(bus, reg):
     """Read a 16-bit value from an 8-bit register."""
     data = bus.read_i2c_block_data(I2C_ADDR, reg, 2)
     return (data[0] << 8) | data[1]
+
+
+def set_page(bus, page):
+    """Select register page."""
+    write_reg16(bus, REG_PAGE_SEL, page)
+    time.sleep(0.01)
 
 
 def set_bit(bus, reg, bit, value):
@@ -140,9 +147,11 @@ def main():
         print("Reading registers 0x64 to 0x67...")
         while True:
             try:
-                for reg in range(REG_SLOTA_CH1, REG_SLOTA_CH4 + 1):
+                set_page(bus, 0x00)
+                time.sleep(0.05)
+                for reg in range(0x0064, 0x0068):
                     val = read_reg16(bus, reg)
-                    print(f"0x{reg:02X}: {val}", end="  ")
+                    print(f"0x{reg:04X}: {val}", end="  ")
                 print("")
             except Exception as e:
                 print(f"Error reading sensor: {e}")
