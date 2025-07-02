@@ -122,7 +122,8 @@ with SMBus(1) as bus:
 
     while True:
         try:
-            set_page(bus, 0x01)
+            # Page 0x00 contains the photodiode data registers
+            set_page(bus, 0x00)
             time.sleep(0.05)
             for reg in range(0x0064, 0x0068):
                 val = read_reg16(bus, reg)
