@@ -19,7 +19,7 @@ REG_CH2         = 0x0016
 REG_PAGE_SEL = 0x000F
 
 def set_page(bus, page):
-    bus.write_i2c_block_data(I2C_ADDR, REG_PAGE_SEL >> 8, [REG_PAGE_SEL & 0xFF, 0x00, page])
+    write_reg16(bus, REG_PAGE_SEL, page)
     time.sleep(0.01)
 
 # Helper: write 16-bit to 16-bit register
