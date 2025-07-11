@@ -73,11 +73,19 @@ def collect_health():
         except:
             return None
 
+    def get_throttled():
+        try:
+            out = subprocess.check_output(["vcgencmd", "get_throttled"]).decode()
+            return out.strip().split("=")[1]
+        except:
+            return None
+
     return {
         "cpu_temp": get_temp(),
         "uptime": get_uptime(),
         "rssi": get_rssi(),
-        "latency_ms": get_latency()
+        "latency_ms": get_latency(),
+        "throttled": get_throttled()
     }
 
 def post_payload(data):
