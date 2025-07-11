@@ -1,0 +1,13 @@
+[Unit]
+Description=Firemark Sensor Reporter
+After=network.target
+
+[Service]
+WorkingDirectory=/home/thebigcafeteria/firemark
+ExecStart=/home/thebigcafeteria/firemark/env/bin/python3 /home/thebigcafeteria/firemark-reporter.py
+Restart=always
+User=thebigcafeteria
+Environment="PYTHONUNBUFFERED=1"
+
+[Install]
+WantedBy=multi-user.target
