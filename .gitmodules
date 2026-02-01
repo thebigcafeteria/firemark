@@ -1,3 +1,6 @@
 [submodule "mikro/firmware"]
     path = mikro/firmware
     url = https://github.com/MikroElektronika/mikrosdk_click_v2.git
+[submodule "mikro/sdk"]
+	path = mikro/sdk
+	url = https://github.com/MikroElektronika/mikrosdk_v2.git
