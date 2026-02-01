@@ -1,1 +1,4 @@
+[submodule "mikro/firmware"]
+    path = mikro/firmware
+    url = https://github.com/MikroElektronika
 
